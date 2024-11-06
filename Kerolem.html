@@ -1,0 +1,144 @@
+<html><head><base href="." target="_self">
+<meta charset="UTF-8">
+<title>Amor Diário para Kerolem</title>
+<style>
+    body {
+        font-family: 'Dancing Script', cursive;
+        background: linear-gradient(135deg, #ffe6e6, #ffb3d9);
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        max-width: 800px;
+        text-align: center;
+        animation: fadeIn 2s ease-in;
+    }
+
+    h1 {
+        color: #ff4d88;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    .message, .poem, .verse {
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .message {
+        background: #fff0f5;
+        font-size: 1.3em;
+    }
+
+    .poem {
+        background: #fff0f5;
+        font-style: italic;
+    }
+
+    .verse {
+        background: #fff0f5;
+        font-family: 'Times New Roman', serif;
+    }
+
+    .signature {
+        color: #ff1a75;
+        font-size: 1.5em;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .heart {
+        color: red;
+        font-size: 2em;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Mensagem Diária de Amor</h1>
+        <div class="message" id="dailyMessage"></div>
+        <div class="signature">Te amo, Kerolem <span class="heart">❤</span></div>
+        <div class="poem" id="dailyPoem"></div>
+        <div class="verse" id="dailyVerse"></div>
+    </div>
+
+<script>
+const messages = [
+    "Cada dia ao seu lado é uma nova aventura cheia de amor e carinho.",
+    "Você é o motivo do meu sorriso todos os dias.",
+    "Seu amor é a luz que ilumina meus dias mais escuros.",
+    "Com você, cada momento se torna especial e único.",
+    "Seu amor me faz querer ser uma pessoa melhor a cada dia.",
+    "Você é o sonho que eu nunca quero acordar.",
+    "Meu coração bate mais forte quando penso em você.",
+];
+
+const poems = [
+    "No silêncio do amor\nEncontro sua presença\nComo estrela que brilha\nIluminando minha existência",
+    "Amor é como brisa\nQue toca suavemente a face\nÉ você em minha vida\nTrazendo paz e romance",
+    "Entre tantos caminhos\nMeu coração escolheu você\nPara juntos seguirmos\nE nossa história viver",
+];
+
+const verses = [
+    "\"O Senhor é o meu pastor; nada me faltará.\" - Salmos 23:1",
+    "\"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito.\" - João 3:16",
+    "\"Tudo posso naquele que me fortalece.\" - Filipenses 4:13",
+    "\"O amor é paciente, o amor é bondoso.\" - 1 Coríntios 13:4",
+];
+
+function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function updateDaily() {
+    const today = new Date().toLocaleDateString();
+    const savedDate = localStorage.getItem('lastUpdate');
+    
+    if (today !== savedDate) {
+        const message = getRandomItem(messages);
+        const poem = getRandomItem(poems);
+        const verse = getRandomItem(verses);
+        
+        document.getElementById('dailyMessage').textContent = message;
+        document.getElementById('dailyPoem').textContent = poem;
+        document.getElementById('dailyVerse').textContent = verse;
+        
+        localStorage.setItem('lastUpdate', today);
+        localStorage.setItem('currentMessage', message);
+        localStorage.setItem('currentPoem', poem);
+        localStorage.setItem('currentVerse', verse);
+    } else {
+        document.getElementById('dailyMessage').textContent = localStorage.getItem('currentMessage');
+        document.getElementById('dailyPoem').textContent = localStorage.getItem('currentPoem');
+        document.getElementById('dailyVerse').textContent = localStorage.getItem('currentVerse');
+    }
+}
+
+updateDaily();
+</script>
+</body>
+</html>
